@@ -5,23 +5,35 @@ from dateutil.relativedelta import relativedelta
 
 class Derivative:
     def __init__(
-        self, notional, fixed_rate, tenor, payment_frequency, start_date, end_date
+        self,
+        notional: int = 1_000_000_000,
+        fixed_rate: float = 0.01,
+        payment_frequency: str = "6M",
+        start_date: date = date.today(),
+        end_date: date = date.today() + relativedelta(years=5),
+        holiday_cals: List[str] = ["USA", "SEK"],
     ) -> None:
         self.notional = notional
         self.fixed_rate = fixed_rate
-        self.tenor = tenor
         self.payment_frequency = payment_frequency
         self.start_date = start_date
         self.end_date = end_date
+        self.holiday_calendars = holiday_cals
         # Additional attributes as needed
 
 
 class IRSSwap(Derivative):
     def __init__(
-        self, notional, fixed_rate, tenor, payment_frequency, start_date, end_date
+        self,
+        notional: int = 1_000_000_000,
+        fixed_rate: float = 0.01,
+        payment_frequency: str = "6M",
+        start_date: date = date.today(),
+        end_date: date = date.today() + relativedelta(years=5),
+        holiday_cals: List[str] = ["USA", "SEK"],
     ) -> None:
         super().__init__(
-            notional, fixed_rate, tenor, payment_frequency, start_date, end_date
+            notional, fixed_rate, payment_frequency, start_date, end_date, holiday_cals
         )
         # Additional attributes as needed for IRSSwap
 
