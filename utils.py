@@ -50,18 +50,53 @@ def generate_complex_mock_ois_rates(curve_date: date, years=30) -> Dict[date, fl
 
     return rates
 
+    from typing import List, Tuple
+    from datetime import date
 
-if __name__ == "__main__":
+    def find_future_cashflows(
+        start_date: date, end_date: date, pay_frequency: str, day_count_convention: str
+    ) -> List[Tuple[date, float]]:
+        """
+        Calculate all future cashflows of a swap given the start date, end date, payment frequency, and day count convention.
 
-    # Example usage
-    curve_date = date(2023, 1, 1)  # Starting date of the curve
-    mock_ois_rates = generate_complex_mock_ois_rates(curve_date)
+        Args:
+        - start_date (date): The start date of the swap.
+        - end_date (date): The end date of the swap.
+        - pay_frequency (str): The frequency of payments (e.g., 'monthly', 'quarterly', 'semi-annually', 'annually').
+        - day_count_convention (str): The day count convention for interest calculation (e.g., '30/360', 'actual/360', 'actual/365').
 
-    # Convert the dictionary to a DataFrame for plotting
-    rates_df = pd.DataFrame(list(mock_ois_rates.items()), columns=["Date", "Rate"])
+        Returns:
+        - List[Tuple[date, float]]: A list of tuples where each tuple contains a payment date and the corresponding cashflow amount.
+        """
+        from dateutil.relativedelta import relativedelta
 
-    # Plotting the OIS rates
-    sns.lineplot(data=rates_df, x="Date", y="Rate").set_title(
-        "Mock OIS Rates Over Time"
-    )
-    plt.show()
+        # Define payment frequency in terms of months
+        frequency_mapping = {
+            "monthly": 1,
+            "quarterly": 3,
+            "semi-annually": 6,
+            "annually": 12,
+        }
+
+        # Calculate the number of days in a year based on the day count convention
+        days_in_year = {"30/360": 360, "actual/360": 360, "actual/365": 365}
+
+        payment_interval = frequency_mapping[pay_frequency]
+        cashflows = []
+        current_date = start_date
+
+        while current_date < end_date:
+            # Calculate next payment date
+            next_payment_date = current_date + relativedelta(months=+payment_interval)
+            if next_payment_date > end_date:
+                next_payment_date = end_date
+
+            # Placeholder for cashflow amount calculation
+            # In a real scenario, this would involve calculating the interest based on the notional amount, rate, and day count convention
+            cashflow_amount = 0.0  # This is a placeholder
+
+            cashflows.append((next_payment_date, cashflow_amount))
+
+            current_date = next_payment_date
+
+        return cashflows
