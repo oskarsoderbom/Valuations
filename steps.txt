@@ -1,0 +1,22 @@
+
+Certainly, here's the step-by-step valuation process for an Interest Rate Swap (IRS) detailed in a bullet point format:
+
+Collect Market Data: Obtain spot, forward, and swap rates for yield and discount curve construction.
+Choose Reference Rate: Select USD SOFR (or appropriate rate) for the floating rate leg.
+Determine Swap Terms: Specify notional amount, fixed rate, floating rate margin, and other key swap terms.
+Specify Start Date: Define the start date of the swap.
+Specify Maturity Date: Define the end date or maturity of the swap.
+Determine Payment Frequency: Set the frequency of payment for both legs.
+Choose Day Count Convention: Select the day count convention for interest calculation.
+Identify Holiday Calendar: Determine the relevant holiday calendar for the swap's currencies.
+Apply Business Day Convention: Choose the business day convention for payment adjustments.
+Build Yield Curve: Construct the yield curve for rate interpolation.
+Build Discount Curve: Create the discount curve using OIS rates.
+Forecast Floating Rates: Project future rates for the floating leg.
+Calculate Fixed Leg Cash Flows: Compute cash flows for the fixed leg.
+Calculate Floating Leg Cash Flows: Estimate cash flows for the floating leg.
+Adjust for Day Count Convention: Apply day count convention to cash flow calculations.
+Discount Cash Flows: Discount future cash flows of both legs to present value.
+Calculate Net Present Value (NPV): Net the present values of both legs to find the swap's NPV.
+Adjust for Counterparty Credit Risk: Consider credit risk in the valuation.
+Final Valuation: Consolidate calculations for the IRS's net valuation.
